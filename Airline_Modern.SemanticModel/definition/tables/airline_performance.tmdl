@@ -1,0 +1,176 @@
+table airline_performance
+	lineageTag: dc41078a-9169-488f-a024-5f384c271a4b
+
+	measure 'Total Flights' =
+			
+			COUNTROWS(fact_flights)
+		formatString: 0
+		lineageTag: e3af1379-3d65-41c9-9546-82b9104bc435
+
+	measure 'Cancelled Flights' =
+			
+			CALCULATE(
+			    COUNTROWS(fact_flights),
+			    fact_flights[IS_CANCELLED] = 1
+			)
+		formatString: 0
+		lineageTag: 022f938e-9776-49ff-b479-65fafc59f0db
+
+	measure 'Cancellation Rate' =
+			
+			DIVIDE(
+			    [Cancelled Flights],
+			    [Total Flights]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 609aa024-441e-4233-802d-d24bee726c2b
+
+	measure 'Arrival Dela Rate' =
+			
+			DIVIDE(
+			    CALCULATE(
+			        COUNTROWS(fact_flights),
+			        fact_flights[IS_ARRIVAL_DELAYED] = 1
+			    ),
+			    [Total Flights]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f3f4b0de-3b91-4461-af21-3f2d6f00d78c
+
+	measure 'Average Arrival Delay' =
+			
+			AVERAGE(fact_flights[ARRIVAL_DELAY])
+		lineageTag: 0a3a047b-20b4-44b1-b2d1-2901283a691c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Departure Delay' =
+			
+			AVERAGE(fact_flights[DEPARTURE_DELAY])
+		lineageTag: 091bdd17-2198-450a-ba8e-aa547b3a840e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AIRLINE
+		dataType: string
+		lineageTag: 5e087b2e-b88b-408f-9daf-436b373971d6
+		summarizeBy: none
+		sourceColumn: AIRLINE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AIRLINE_NAME
+		dataType: string
+		lineageTag: 865c6c43-862b-48f1-9d9f-dc642be3ecd4
+		summarizeBy: none
+		sourceColumn: AIRLINE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: 9762ad31-e063-42c1-b7b2-38f830930dc2
+		summarizeBy: sum
+		sourceColumn: Total_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cancelled_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: d8985767-14a5-4dba-a81f-fb1347ce6554
+		summarizeBy: sum
+		sourceColumn: Cancelled_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Diverted_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: cb1f7a8f-21c0-4bb3-81e0-6f0eeab137fd
+		summarizeBy: sum
+		sourceColumn: Diverted_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Departures
+		dataType: int64
+		formatString: 0
+		lineageTag: 75efbbb2-561e-4d04-8beb-51ffd070e4b0
+		summarizeBy: sum
+		sourceColumn: Delayed_Departures
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Arrivals
+		dataType: int64
+		formatString: 0
+		lineageTag: e223d252-b983-4748-82a6-87e28687a4a2
+		summarizeBy: sum
+		sourceColumn: Delayed_Arrivals
+
+		annotation SummarizationSetBy = Automatic
+
+	column Avg_Departure_Delay
+		dataType: double
+		lineageTag: d0a4a597-43f1-4a8e-892a-7a0acfa26bed
+		summarizeBy: sum
+		sourceColumn: Avg_Departure_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Avg_Arrival_Delay
+		dataType: double
+		lineageTag: ebcecb86-08be-460d-9fa7-203cc1adb054
+		summarizeBy: sum
+		sourceColumn: Avg_Arrival_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cancellation_Rate
+		dataType: double
+		lineageTag: e5d8d161-ea89-410f-aae1-14d3818fb5da
+		summarizeBy: sum
+		sourceColumn: Cancellation_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Departure_Delay_Rate
+		dataType: double
+		lineageTag: 9cda7c6b-9aff-4ce9-838b-7dd55c12cdd2
+		summarizeBy: sum
+		sourceColumn: Departure_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Arrival_Delay_Rate
+		dataType: double
+		lineageTag: d29b5eab-f8c6-4fcf-b223-216f92f781b0
+		summarizeBy: sum
+		sourceColumn: Arrival_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition airline_performance = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\airline_performance.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"AIRLINE", type text}, {"AIRLINE_NAME", type text}, {"Total_Flights", Int64.Type}, {"Cancelled_Flights", Int64.Type}, {"Diverted_Flights", Int64.Type}, {"Delayed_Departures", Int64.Type}, {"Delayed_Arrivals", Int64.Type}, {"Avg_Departure_Delay", type number}, {"Avg_Arrival_Delay", type number}, {"Cancellation_Rate", type number}, {"Departure_Delay_Rate", type number}, {"Arrival_Delay_Rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

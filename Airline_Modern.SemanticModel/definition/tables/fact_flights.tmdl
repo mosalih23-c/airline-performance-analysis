@@ -1,0 +1,236 @@
+table fact_flights
+	lineageTag: 97563392-dc58-4cbe-863a-d461fd903743
+
+	column FLIGHT_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 343341a2-0130-4bac-85b7-645a97ab1af2
+		summarizeBy: none
+		sourceColumn: FLIGHT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 18b8b2df-e147-49ac-9d9d-46f1e956e899
+		summarizeBy: sum
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ec157b3-1659-4b75-9459-68b44fb42837
+		summarizeBy: sum
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH_NAME
+		dataType: string
+		lineageTag: 05fb1fdb-c523-442b-9c82-3c214fa4994e
+		summarizeBy: none
+		sourceColumn: MONTH_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY
+		dataType: int64
+		formatString: 0
+		lineageTag: d28c5f88-ac21-40be-aa1c-1867e357b49c
+		summarizeBy: sum
+		sourceColumn: DAY
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_OF_WEEK
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ea308ed-8e8d-4098-ab71-bdf8b25dab80
+		summarizeBy: sum
+		sourceColumn: DAY_OF_WEEK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_NAME
+		dataType: string
+		lineageTag: 9b807ab0-d375-4e45-9752-2496be92dcda
+		summarizeBy: none
+		sourceColumn: DAY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPARTURE_HOUR
+		dataType: int64
+		formatString: 0
+		lineageTag: 23b7ad0a-9a5e-4756-9b2a-fa4c86ac2cd0
+		summarizeBy: sum
+		sourceColumn: DEPARTURE_HOUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column AIRLINE
+		dataType: string
+		lineageTag: 800492d2-945a-4d0c-86fb-2fb986c371cb
+		summarizeBy: none
+		sourceColumn: AIRLINE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FLIGHT_NUMBER
+		dataType: int64
+		formatString: 0
+		lineageTag: bd9315d6-d395-4e93-8ade-ceb068345077
+		summarizeBy: sum
+		sourceColumn: FLIGHT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORIGIN_AIRPORT
+		dataType: string
+		lineageTag: c5e99727-d7aa-4c49-b846-68cc59e60ab8
+		summarizeBy: none
+		sourceColumn: ORIGIN_AIRPORT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESTINATION_AIRPORT
+		dataType: string
+		lineageTag: b5bdbb9e-28d4-4915-8340-c87b0794cf15
+		summarizeBy: none
+		sourceColumn: DESTINATION_AIRPORT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPARTURE_DELAY
+		dataType: int64
+		formatString: 0
+		lineageTag: d26c217c-ee6d-4360-9d7d-7747d0db49bf
+		summarizeBy: sum
+		sourceColumn: DEPARTURE_DELAY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ARRIVAL_DELAY
+		dataType: int64
+		formatString: 0
+		lineageTag: b8d8aadb-d11a-4042-b103-a5f9035544a0
+		summarizeBy: sum
+		sourceColumn: ARRIVAL_DELAY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CANCELLED
+		dataType: int64
+		formatString: 0
+		lineageTag: 95ef6e6f-7602-4a4b-84c4-307c7227cb02
+		summarizeBy: sum
+		sourceColumn: CANCELLED
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIVERTED
+		dataType: int64
+		formatString: 0
+		lineageTag: 4413079e-6928-407a-a96d-06bf81ee82aa
+		summarizeBy: sum
+		sourceColumn: DIVERTED
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_CANCELLED
+		dataType: int64
+		formatString: 0
+		lineageTag: 53a01837-b76a-458f-8c52-7c439e526d4e
+		summarizeBy: sum
+		sourceColumn: IS_CANCELLED
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_DIVERTED
+		dataType: int64
+		formatString: 0
+		lineageTag: 7548320d-ce5b-4508-b4ac-f6d7c752f4a5
+		summarizeBy: sum
+		sourceColumn: IS_DIVERTED
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_DEPARTURE_DELAYED
+		dataType: int64
+		formatString: 0
+		lineageTag: aba5108a-55bb-4f11-a7fd-ac2a903506d4
+		summarizeBy: sum
+		sourceColumn: IS_DEPARTURE_DELAYED
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_ARRIVAL_DELAYED
+		dataType: int64
+		formatString: 0
+		lineageTag: 655f69da-abc7-46c3-8d29-aa646f4cb85f
+		summarizeBy: sum
+		sourceColumn: IS_ARRIVAL_DELAYED
+
+		annotation SummarizationSetBy = Automatic
+
+	column ARRIVAL_DELAY_CATEGORY
+		dataType: string
+		lineageTag: bf494171-bd77-4d09-bd33-7de9e0f36bb1
+		summarizeBy: none
+		sourceColumn: ARRIVAL_DELAY_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIN_DELAY_CAUSE
+		dataType: string
+		lineageTag: 27ba01fe-52c9-4eea-a621-6da6d7659066
+		summarizeBy: none
+		sourceColumn: MAIN_DELAY_CAUSE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_DELAY_CAUSES
+		dataType: int64
+		formatString: 0
+		lineageTag: 97db8209-37f3-46ba-882b-2600083a416c
+		summarizeBy: sum
+		sourceColumn: TOTAL_DELAY_CAUSES
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISTANCE
+		dataType: int64
+		formatString: 0
+		lineageTag: a8aa2f91-1b27-42b8-832e-4f5c07a9a516
+		summarizeBy: sum
+		sourceColumn: DISTANCE
+
+		annotation SummarizationSetBy = Automatic
+
+	column Route =
+			
+			fact_flights[ORIGIN_AIRPORT]
+			    & " → "
+			    & fact_flights[DESTINATION_AIRPORT]
+		lineageTag: 18921d16-e462-4c67-9fbb-3860b5a44dc6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_flights = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\fact_flights.csv"),[Delimiter=",", Columns=24, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"FLIGHT_DATE", type date}, {"YEAR", Int64.Type}, {"MONTH", Int64.Type}, {"MONTH_NAME", type text}, {"DAY", Int64.Type}, {"DAY_OF_WEEK", Int64.Type}, {"DAY_NAME", type text}, {"DEPARTURE_HOUR", Int64.Type}, {"AIRLINE", type text}, {"FLIGHT_NUMBER", Int64.Type}, {"ORIGIN_AIRPORT", type text}, {"DESTINATION_AIRPORT", type text}, {"DEPARTURE_DELAY", Int64.Type}, {"ARRIVAL_DELAY", Int64.Type}, {"CANCELLED", Int64.Type}, {"DIVERTED", Int64.Type}, {"IS_CANCELLED", Int64.Type}, {"IS_DIVERTED", Int64.Type}, {"IS_DEPARTURE_DELAYED", Int64.Type}, {"IS_ARRIVAL_DELAYED", Int64.Type}, {"ARRIVAL_DELAY_CATEGORY", type text}, {"MAIN_DELAY_CAUSE", type text}, {"TOTAL_DELAY_CAUSES", Int64.Type}, {"DISTANCE", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

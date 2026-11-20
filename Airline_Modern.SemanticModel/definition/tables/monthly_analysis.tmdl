@@ -1,0 +1,127 @@
+table monthly_analysis
+	lineageTag: 0f51c5a8-6f57-4d1d-a98c-c69e16688884
+
+	measure 'Arrival Delay Rate' =
+			
+			DIVIDE(
+			    AVERAGE(monthly_analysis[Arrival_Delay_Rate]),
+			    100
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 70970e7d-845d-4d83-84bb-77a349be3c73
+
+	column MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fb47ffa-efde-4960-9dca-f9f8c5c04769
+		summarizeBy: sum
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH_NAME
+		dataType: string
+		lineageTag: 262427fa-f89d-4bbb-a453-130dd64e8b7c
+		summarizeBy: none
+		sourceColumn: MONTH_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: 429f4fa4-7cfc-46e9-966d-4e9aaeaae702
+		summarizeBy: sum
+		sourceColumn: Total_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cancelled_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: aff17aea-e416-4b74-bd0c-a8d25b2b55f0
+		summarizeBy: sum
+		sourceColumn: Cancelled_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Departures
+		dataType: int64
+		formatString: 0
+		lineageTag: 69c9a2f8-bc4b-4770-a151-5cafe10e29fc
+		summarizeBy: sum
+		sourceColumn: Delayed_Departures
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Arrivals
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c7d261d-4203-4705-8c23-9811358c97a8
+		summarizeBy: sum
+		sourceColumn: Delayed_Arrivals
+
+		annotation SummarizationSetBy = Automatic
+
+	column Avg_Departure_Delay
+		dataType: double
+		lineageTag: 6f4c0aa2-dfca-4a70-bc66-c240ee2ec3bb
+		summarizeBy: sum
+		sourceColumn: Avg_Departure_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Avg_Arrival_Delay
+		dataType: double
+		lineageTag: 19b44588-d251-4eec-824b-d26d276cfc02
+		summarizeBy: sum
+		sourceColumn: Avg_Arrival_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cancellation_Rate
+		dataType: double
+		lineageTag: e1a52cb9-7ef8-41c7-a39b-e4320cc23733
+		summarizeBy: sum
+		sourceColumn: Cancellation_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Departure_Delay_Rate
+		dataType: double
+		lineageTag: 2c81363f-e70f-4fee-97b2-e814edbc45c5
+		summarizeBy: sum
+		sourceColumn: Departure_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Arrival_Delay_Rate
+		dataType: double
+		lineageTag: 7a1acb48-6964-40c5-a940-e836e18a6322
+		summarizeBy: sum
+		sourceColumn: Arrival_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition monthly_analysis = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\monthly_analysis.csv"),[Delimiter=",", Columns=11, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"MONTH", Int64.Type}, {"MONTH_NAME", type text}, {"Total_Flights", Int64.Type}, {"Cancelled_Flights", Int64.Type}, {"Delayed_Departures", Int64.Type}, {"Delayed_Arrivals", Int64.Type}, {"Avg_Departure_Delay", type number}, {"Avg_Arrival_Delay", type number}, {"Cancellation_Rate", type number}, {"Departure_Delay_Rate", type number}, {"Arrival_Delay_Rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

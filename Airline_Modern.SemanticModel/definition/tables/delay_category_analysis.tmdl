@@ -1,0 +1,42 @@
+table delay_category_analysis
+	lineageTag: 5367316b-b8c0-4a59-8a10-6c4232ed7825
+
+	column ARRIVAL_DELAY_CATEGORY
+		dataType: string
+		lineageTag: f8c8120f-4c48-4a11-afdd-f3ac072a0683
+		summarizeBy: none
+		sourceColumn: ARRIVAL_DELAY_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: 32b53a5f-21ca-4adf-aad5-fcb84ddc8c68
+		summarizeBy: sum
+		sourceColumn: Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Percentage
+		dataType: double
+		lineageTag: a570671b-1516-471c-a001-ab637f329e9b
+		summarizeBy: sum
+		sourceColumn: Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition delay_category_analysis = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\delay_category_analysis.csv"),[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ARRIVAL_DELAY_CATEGORY", type text}, {"Flights", Int64.Type}, {"Percentage", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

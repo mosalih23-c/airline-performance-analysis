@@ -1,0 +1,7 @@
+# Power BI local files
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Raw data (too large for GitHub)
+data/
+*.pbix

@@ -1,0 +1,77 @@
+table dim_origin_airport
+	lineageTag: ac13438c-817c-494b-ad6a-2422486b59c3
+
+	column AIRPORT_CODE
+		dataType: string
+		lineageTag: 9319e7be-ad7b-4819-96b0-039c1bd32faa
+		summarizeBy: none
+		sourceColumn: AIRPORT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AIRPORT_NAME
+		dataType: string
+		lineageTag: 95360c79-41fb-4f05-8122-b40758f6e8e4
+		summarizeBy: none
+		sourceColumn: AIRPORT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		lineageTag: 3bb47c9e-06e4-4ee8-9d37-3711d2b877d8
+		summarizeBy: none
+		sourceColumn: CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATE
+		dataType: string
+		lineageTag: 895872bd-426c-48a3-9604-6fc9ebe1b7be
+		summarizeBy: none
+		sourceColumn: STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY
+		dataType: string
+		lineageTag: 760d841f-bfcf-4e04-bd35-94ed6815d484
+		summarizeBy: none
+		sourceColumn: COUNTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column LATITUDE
+		dataType: double
+		lineageTag: fe48266c-1183-49c6-b3bf-64c9f6c21362
+		summarizeBy: none
+		sourceColumn: LATITUDE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LONGITUDE
+		dataType: double
+		lineageTag: 4c8fb7c5-7204-4779-9f32-a1c3c7678bf1
+		summarizeBy: none
+		sourceColumn: LONGITUDE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_origin_airport = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\dim_airport.csv"),[Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"AIRPORT_CODE", type text}, {"AIRPORT_NAME", type text}, {"CITY", type text}, {"STATE", type text}, {"COUNTRY", type text}, {"LATITUDE", type number}, {"LONGITUDE", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

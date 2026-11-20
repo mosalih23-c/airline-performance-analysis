@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Airline_Modern"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "506f3a01-189c-4889-83e0-cf992410b0e5"
+  }
+}

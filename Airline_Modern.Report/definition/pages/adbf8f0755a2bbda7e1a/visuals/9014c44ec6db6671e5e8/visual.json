@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "9014c44ec6db6671e5e8",
+  "position": {
+    "x": 97.546531753428312,
+    "y": 150.92104912794568,
+    "z": 13000,
+    "height": 246.62708028225271,
+    "width": 397.54812941019838,
+    "tabOrder": 13000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Flight Delays & Causes Analysis",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "42pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

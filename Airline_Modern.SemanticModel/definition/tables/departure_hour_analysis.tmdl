@@ -1,0 +1,91 @@
+table departure_hour_analysis
+	lineageTag: cf9116e9-4076-487d-b6d4-b5d483cddcc2
+
+	column DEPARTURE_HOUR
+		dataType: int64
+		formatString: 0
+		lineageTag: b95f1eea-7194-47d8-a40c-dcf6ae2b8f94
+		summarizeBy: sum
+		sourceColumn: DEPARTURE_HOUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: c83960e5-3824-4ff2-b477-0c10abad1f6b
+		summarizeBy: sum
+		sourceColumn: Total_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Departures
+		dataType: int64
+		formatString: 0
+		lineageTag: 56c791cb-b532-485d-8eee-aeecf574b2e9
+		summarizeBy: sum
+		sourceColumn: Delayed_Departures
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Arrivals
+		dataType: int64
+		formatString: 0
+		lineageTag: 1726186a-ff78-46fb-b068-69538bb17f68
+		summarizeBy: sum
+		sourceColumn: Delayed_Arrivals
+
+		annotation SummarizationSetBy = Automatic
+
+	column Avg_Departure_Delay
+		dataType: double
+		lineageTag: caac480f-9bc6-46e0-9fe3-0e5ac2e079d9
+		summarizeBy: sum
+		sourceColumn: Avg_Departure_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Avg_Arrival_Delay
+		dataType: double
+		lineageTag: 76ddccce-eaa5-4f31-ba64-a9e0f264e29e
+		summarizeBy: sum
+		sourceColumn: Avg_Arrival_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Departure_Delay_Rate
+		dataType: double
+		lineageTag: cb3f4b6a-cc19-4bc3-922f-c2ef3532dd91
+		summarizeBy: sum
+		sourceColumn: Departure_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Arrival_Delay_Rate
+		dataType: double
+		lineageTag: a1bbdf69-853f-45e9-a80c-21c69d988283
+		summarizeBy: sum
+		sourceColumn: Arrival_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition departure_hour_analysis = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\departure_hour_analysis.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"DEPARTURE_HOUR", Int64.Type}, {"Total_Flights", Int64.Type}, {"Delayed_Departures", Int64.Type}, {"Delayed_Arrivals", Int64.Type}, {"Avg_Departure_Delay", type number}, {"Avg_Arrival_Delay", type number}, {"Departure_Delay_Rate", type number}, {"Arrival_Delay_Rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,51 @@
+table delay_cause_analysis
+	lineageTag: 20d5bbd0-684c-4cfb-8240-d159390cfef2
+
+	column MAIN_DELAY_CAUSE
+		dataType: string
+		lineageTag: a523db1e-3ece-4315-b672-fce6e8e88f7a
+		summarizeBy: none
+		sourceColumn: MAIN_DELAY_CAUSE
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: fc347927-1fa0-433f-9799-434013ca1d1f
+		summarizeBy: sum
+		sourceColumn: Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Delay_Minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 6e182e2a-7f43-45a3-a11d-5ebc09a19ab0
+		summarizeBy: sum
+		sourceColumn: Total_Delay_Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Percentage
+		dataType: double
+		lineageTag: 4c264658-4808-4b8d-849f-66ea7e8a9cf9
+		summarizeBy: sum
+		sourceColumn: Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition delay_cause_analysis = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\delay_cause_analysis.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"MAIN_DELAY_CAUSE", type text}, {"Flights", Int64.Type}, {"Total_Delay_Minutes", Int64.Type}, {"Percentage", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

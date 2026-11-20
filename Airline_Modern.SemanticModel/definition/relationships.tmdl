@@ -1,0 +1,21 @@
+relationship 197909bc-b199-4840-bc67-0f770ca12546
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date.DATE
+	toColumn: LocalDateTable_1e13128e-df2f-4157-b85e-9872f62a86f9.Date
+
+relationship aa82c197-8999-c27f-9873-a5f2bf0dcfc6
+	fromColumn: fact_flights.AIRLINE
+	toColumn: dim_airline.Column1
+
+relationship 41c7f56c-36af-0197-81eb-38699bd4fd7d
+	fromColumn: fact_flights.FLIGHT_DATE
+	toColumn: dim_date.DATE
+
+relationship 421c6f3a-d43b-ec21-1e03-0ef7b372a45a
+	fromColumn: fact_flights.ORIGIN_AIRPORT
+	toColumn: dim_origin_airport.AIRPORT_CODE
+
+relationship b750ba67-0d3f-06fb-b0ee-36d0e5afc5e8
+	fromColumn: fact_flights.DESTINATION_AIRPORT
+	toColumn: dim_destination_airport.AIRPORT_CODE
+

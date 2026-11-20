@@ -1,0 +1,9 @@
+Metric,Value
+Total Flights,5819079.0
+Cancelled Flights,89884.0
+Cancellation Rate (%),1.5446430612129514
+Diverted Flights,15187.0
+Departure Delay Rate (%),36.52842657747042
+Arrival Delay Rate (%),35.8629948141278
+Average Departure Delay (min),9.370158275198389
+Average Arrival Delay (min),4.407057357987598

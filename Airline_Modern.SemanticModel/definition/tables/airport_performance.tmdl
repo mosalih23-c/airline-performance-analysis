@@ -1,0 +1,94 @@
+table airport_performance
+	lineageTag: 9035d338-75ef-4569-9327-a01c3f6dd102
+
+	column ORIGIN_AIRPORT
+		dataType: string
+		lineageTag: 749aacb3-fd1d-4314-ab17-4b1651843491
+		summarizeBy: none
+		sourceColumn: ORIGIN_AIRPORT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORIGIN_AIRPORT_NAME
+		dataType: string
+		lineageTag: 8a2893a7-8c31-49cc-93dd-5d422aee4e23
+		summarizeBy: none
+		sourceColumn: ORIGIN_AIRPORT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORIGIN_CITY
+		dataType: string
+		lineageTag: fe2974df-b8d6-4651-97a7-ea6c822432ee
+		summarizeBy: none
+		sourceColumn: ORIGIN_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORIGIN_STATE
+		dataType: string
+		lineageTag: 5cf2331f-844c-43f1-ac5a-7d7951715025
+		summarizeBy: none
+		sourceColumn: ORIGIN_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d080c65-0a13-415b-957a-ba4dec23ed41
+		summarizeBy: sum
+		sourceColumn: Total_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Departures
+		dataType: int64
+		formatString: 0
+		lineageTag: c3fe4c40-0be2-463a-b922-73e85f92c7d5
+		summarizeBy: sum
+		sourceColumn: Delayed_Departures
+
+		annotation SummarizationSetBy = Automatic
+
+	column Avg_Departure_Delay
+		dataType: double
+		lineageTag: 35f3dfa4-9d2b-4956-bcba-9a43453e54e0
+		summarizeBy: sum
+		sourceColumn: Avg_Departure_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cancelled_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: 43b81ef5-40d5-4651-81d3-de3e5980ca33
+		summarizeBy: sum
+		sourceColumn: Cancelled_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Departure_Delay_Rate
+		dataType: double
+		lineageTag: 14a8350c-3c9e-4f2a-9d36-4886f0c97123
+		summarizeBy: sum
+		sourceColumn: Departure_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition airport_performance = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\airport_performance.csv"),[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ORIGIN_AIRPORT", type text}, {"ORIGIN_AIRPORT_NAME", type text}, {"ORIGIN_CITY", type text}, {"ORIGIN_STATE", type text}, {"Total_Flights", Int64.Type}, {"Delayed_Departures", Int64.Type}, {"Avg_Departure_Delay", type number}, {"Cancelled_Flights", Int64.Type}, {"Departure_Delay_Rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,34 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["kpi_summary","airline_performance","airport_performance","day_of_week_analysis","delay_category_analysis","delay_cause_analysis","departure_hour_analysis","monthly_analysis","route_analysis","dim_airline","dim_date","fact_flights","dim_origin_airport","dim_destination_airport"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table kpi_summary
+ref table airline_performance
+ref table airport_performance
+ref table day_of_week_analysis
+ref table delay_category_analysis
+ref table delay_cause_analysis
+ref table departure_hour_analysis
+ref table monthly_analysis
+ref table route_analysis
+ref table dim_airline
+ref table dim_date
+ref table DateTableTemplate_a25c0c19-fddf-47b0-a020-8836ca7a19ce
+ref table LocalDateTable_1e13128e-df2f-4157-b85e-9872f62a86f9
+ref table fact_flights
+ref table dim_origin_airport
+ref table dim_destination_airport
+
+ref cultureInfo en-US
+

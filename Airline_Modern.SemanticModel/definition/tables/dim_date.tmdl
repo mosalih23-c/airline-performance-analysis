@@ -1,0 +1,89 @@
+table dim_date
+	lineageTag: aa706540-57a0-4d74-899c-c4cadd58b273
+
+	column DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 675aae49-d4d4-4d59-a17a-5fea48a63948
+		summarizeBy: none
+		sourceColumn: DATE
+
+		variation Variation
+			isDefault
+			relationship: 197909bc-b199-4840-bc67-0f770ca12546
+			defaultHierarchy: LocalDateTable_1e13128e-df2f-4157-b85e-9872f62a86f9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: a5a7819f-75d6-4ab7-a92a-3bd747ee7920
+		summarizeBy: sum
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: c6b285af-2266-4f1f-b739-da0757c9e584
+		summarizeBy: sum
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH_NAME
+		dataType: string
+		lineageTag: 7da08731-ec7f-4934-9f1c-e5ddcd5be390
+		summarizeBy: none
+		sourceColumn: MONTH_NAME
+		sortByColumn: MONTH
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY
+		dataType: int64
+		formatString: 0
+		lineageTag: 934fad1c-b2d6-405b-a825-adc0764a00c3
+		summarizeBy: sum
+		sourceColumn: DAY
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_OF_WEEK
+		dataType: int64
+		formatString: 0
+		lineageTag: d54041af-1a95-475c-80a5-ebf4ccf58b21
+		summarizeBy: sum
+		sourceColumn: DAY_OF_WEEK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_NAME
+		dataType: string
+		lineageTag: 6e6b8a2b-df41-489f-b5d2-9844f2ccd4cd
+		summarizeBy: none
+		sourceColumn: DAY_NAME
+		sortByColumn: DAY_OF_WEEK
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\dim_date.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"DATE", type date}, {"YEAR", Int64.Type}, {"MONTH", Int64.Type}, {"MONTH_NAME", type text}, {"DAY", Int64.Type}, {"DAY_OF_WEEK", Int64.Type}, {"DAY_NAME", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

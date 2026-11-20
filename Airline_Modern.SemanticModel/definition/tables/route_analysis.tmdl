@@ -1,0 +1,71 @@
+table route_analysis
+	lineageTag: 0534e508-23d4-4a38-92d1-9e7e62fdce5e
+
+	column ORIGIN_AIRPORT
+		dataType: int64
+		formatString: 0
+		lineageTag: 30ab631d-ed55-4e20-89e5-5e9ca16e798a
+		summarizeBy: sum
+		sourceColumn: ORIGIN_AIRPORT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESTINATION_AIRPORT
+		dataType: int64
+		formatString: 0
+		lineageTag: b2e26078-0913-44ec-af96-01c0e8ca8590
+		summarizeBy: sum
+		sourceColumn: DESTINATION_AIRPORT
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: 96080374-e1ae-4216-b179-37cdbb6526d2
+		summarizeBy: sum
+		sourceColumn: Total_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Arrivals
+		dataType: int64
+		formatString: 0
+		lineageTag: 1084223c-8238-41bb-804b-d6fecf5226a7
+		summarizeBy: sum
+		sourceColumn: Delayed_Arrivals
+
+		annotation SummarizationSetBy = Automatic
+
+	column Avg_Arrival_Delay
+		dataType: double
+		lineageTag: 160919e8-b22f-4e9b-8c4c-13febb9c559d
+		summarizeBy: sum
+		sourceColumn: Avg_Arrival_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Arrival_Delay_Rate
+		dataType: double
+		lineageTag: 5722bc01-e984-4541-ae6f-e2983b02d841
+		summarizeBy: sum
+		sourceColumn: Arrival_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition route_analysis = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\route_analysis.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ORIGIN_AIRPORT", Int64.Type}, {"DESTINATION_AIRPORT", Int64.Type}, {"Total_Flights", Int64.Type}, {"Delayed_Arrivals", Int64.Type}, {"Avg_Arrival_Delay", type number}, {"Arrival_Delay_Rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

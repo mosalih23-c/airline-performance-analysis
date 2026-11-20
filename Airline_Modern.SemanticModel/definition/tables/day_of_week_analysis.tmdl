@@ -1,0 +1,99 @@
+table day_of_week_analysis
+	lineageTag: df222985-11fc-4dc3-85fd-ee49ef508a3a
+
+	column DAY_OF_WEEK
+		dataType: int64
+		formatString: 0
+		lineageTag: 8046f2ae-a7a3-47cd-a3c4-66fa78952b3b
+		summarizeBy: sum
+		sourceColumn: DAY_OF_WEEK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_NAME
+		dataType: string
+		lineageTag: aa895201-98bc-49d9-85f8-6b0185388edb
+		summarizeBy: none
+		sourceColumn: DAY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Flights
+		dataType: int64
+		formatString: 0
+		lineageTag: de8880f9-6f68-454b-b3a6-40b9f15b595e
+		summarizeBy: sum
+		sourceColumn: Total_Flights
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Departures
+		dataType: int64
+		formatString: 0
+		lineageTag: d012b3f5-f6b9-417b-90d9-21a0780e09ee
+		summarizeBy: sum
+		sourceColumn: Delayed_Departures
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delayed_Arrivals
+		dataType: int64
+		formatString: 0
+		lineageTag: b496f99f-2c0a-423a-9c03-ed3631c9a428
+		summarizeBy: sum
+		sourceColumn: Delayed_Arrivals
+
+		annotation SummarizationSetBy = Automatic
+
+	column Avg_Departure_Delay
+		dataType: double
+		lineageTag: 36f38646-5f87-43c9-8f42-39cf381b6d10
+		summarizeBy: sum
+		sourceColumn: Avg_Departure_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Avg_Arrival_Delay
+		dataType: double
+		lineageTag: ebdc8ebd-99e2-487b-8dc2-33df8cfacd8c
+		summarizeBy: sum
+		sourceColumn: Avg_Arrival_Delay
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Departure_Delay_Rate
+		dataType: double
+		lineageTag: 9999847c-a1ba-4618-979c-049da451a417
+		summarizeBy: sum
+		sourceColumn: Departure_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Arrival_Delay_Rate
+		dataType: double
+		lineageTag: 64fc6a71-019e-4dc6-89a1-72fd12f6b4f1
+		summarizeBy: sum
+		sourceColumn: Arrival_Delay_Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition day_of_week_analysis = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\day_of_week_analysis.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"DAY_OF_WEEK", Int64.Type}, {"DAY_NAME", type text}, {"Total_Flights", Int64.Type}, {"Delayed_Departures", Int64.Type}, {"Delayed_Arrivals", Int64.Type}, {"Avg_Departure_Delay", type number}, {"Avg_Arrival_Delay", type number}, {"Departure_Delay_Rate", type number}, {"Arrival_Delay_Rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

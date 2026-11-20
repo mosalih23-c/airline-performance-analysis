@@ -1,0 +1,30 @@
+table dim_airline
+	lineageTag: 2a6d3284-e045-4d38-b119-907548ac7f1a
+
+	column Column1
+		dataType: string
+		lineageTag: ffb124f0-0415-43e4-90ea-dfa83b489062
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: 0afcc681-beb6-45bf-8575-a3f3291de1f8
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_airline = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\dim_airline.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

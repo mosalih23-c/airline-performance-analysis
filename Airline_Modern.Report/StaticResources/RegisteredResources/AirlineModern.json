@@ -1,0 +1,224 @@
+{
+  "name": "Airline Modern",
+  "dataColors": [
+    "#38BDF8",
+    "#F5A524",
+    "#818CF8",
+    "#34D399",
+    "#F87171",
+    "#A78BFA",
+    "#2DD4BF",
+    "#F472B6",
+    "#FACC15",
+    "#60A5FA"
+  ],
+  "background": "#0B1526",
+  "foreground": "#EDF5FF",
+  "tableAccent": "#38BDF8",
+  "good": "#34D399",
+  "bad": "#F87171",
+  "neutral": "#F5A524",
+  "textClasses": {
+    "callout": {
+      "fontSize": 30,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#EDF5FF"
+    },
+    "title": {
+      "fontSize": 14,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#EDF5FF"
+    },
+    "header": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#EDF5FF"
+    },
+    "label": {
+      "fontSize": 10,
+      "fontFace": "Segoe UI",
+      "color": "#9FB0C5"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#12213A"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#22344F"
+              }
+            },
+            "radius": 14
+          }
+        ],
+        "title": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#EDF5FF"
+              }
+            }
+          }
+        ],
+        "subTitle": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#9FB0C5"
+              }
+            }
+          }
+        ],
+        "categoryAxis": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#9FB0C5"
+              }
+            },
+            "titleColor": {
+              "solid": {
+                "color": "#9FB0C5"
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": "#1E3050"
+              }
+            }
+          }
+        ],
+        "valueAxis": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#9FB0C5"
+              }
+            },
+            "titleColor": {
+              "solid": {
+                "color": "#9FB0C5"
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": "#1E3050"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#9FB0C5"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#EDF5FF"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#0B1526"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#070F1C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "textbox": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "shape": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "actionButton": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "image": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ]
+      }
+    }
+  }
+}

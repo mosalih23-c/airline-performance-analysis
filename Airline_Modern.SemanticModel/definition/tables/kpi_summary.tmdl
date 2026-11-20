@@ -1,0 +1,57 @@
+table kpi_summary
+	lineageTag: 24457c4d-2729-4f21-81de-b1cfc1072d5f
+
+	measure 'Cancellation Rate Display' =
+			
+			DIVIDE(
+			    CALCULATE(
+			        SUM(kpi_summary[Value]),
+			        kpi_summary[Metric] = "Cancellation Rate (%)"
+			    ),
+			    100
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 445f8bd9-0ef8-44bf-aca0-9f5e45a6bda1
+
+	measure 'Arrival Delay Rate Display' =
+			
+			DIVIDE(
+			    CALCULATE(
+			        SUM(kpi_summary[Value]),
+			        kpi_summary[Metric] = "Arrival Delay Rate (%)"
+			    ),
+			    100
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 00b54e32-fa95-410e-b733-9b922de5ffdf
+
+	column Metric
+		dataType: string
+		lineageTag: 008144bd-d98c-42d9-9392-aace7c354ab2
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: 6ed93bca-cc93-4409-b51b-e6c0cca54285
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition kpi_summary = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\data analysis project\airline-performance-analysis\results\kpi_summary.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Metric", type text}, {"Value", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

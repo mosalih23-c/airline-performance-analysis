@@ -1,0 +1,73 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "fa73c0a87d83be8eec17",
+  "position": {
+    "x": 114.11103714551992,
+    "y": 793.25575822127553,
+    "z": 11000,
+    "height": 93.865530555185742,
+    "width": 357.05711622953004,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_destination_airport"
+                    }
+                  },
+                  "Property": "AIRPORT_NAME"
+                }
+              },
+              "queryRef": "dim_destination_airport.AIRPORT_NAME",
+              "nativeQueryRef": "Destination Airport",
+              "active": true,
+              "displayName": "Destination Airport"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
+      ],
+      "items": [
+        {
+          "properties": {
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
